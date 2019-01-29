@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="conteiner">
+
+    </div>
+    <script>
+        let contenedor = document.querySelector('#conteiner');
+        for(let i=1; i<=100;i++){
+            let botn = document.createElement('button');
+            botn.id=i;
+            botn.addEventListener('click',hola);
+            botn.innerHTML=`boton ${i}`;
+            if(i%2 == 0){
+                botn.style.backgroundColor = "blue";
+            }
+            else{
+                botn.style.backgroundColor ="red";
+            }
+            contenedor.appendChild(botn);
+        }
+        function hola(event){
+            alert(`Hi from boton ${event.target.id}`);
+        }
+    </script>
+</body>
+</html>

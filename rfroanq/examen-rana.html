@@ -1,0 +1,76 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="examen-rana">
+  <template>
+    <style>
+      :host {
+        display: flex;
+      }
+      #rocks{
+        border: 2px solid black;
+        height: 50px;
+        width: 50px;
+        text-align: center;
+        padding-top: 5px;
+      }
+     div.frog{
+       background-color: red;
+       color: white;
+     }
+    </style>
+    <dom-repeat items="[[line]]" as="rock">
+      <template>
+        <div id="rocks" class$="{{rock}}">
+          [[rock]]
+        </div>
+      </template>
+    </dom-repeat>
+  </template>
+
+  <script>
+    /**
+     * `examen-rana`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ExamenRana extends Polymer.Element {
+      static get is() { return 'examen-rana'; }
+      static get properties() {
+        return {
+          line: {
+            type: Array,
+            value: ['frog',null,null,null,null,null,null,null]
+          },
+          toMove:{
+            type:Number,
+            value: 8,
+            observer: "_move"
+          },
+          indexfrog:{
+            type:Number,
+            value: 0,
+            notify:true
+          }
+        };
+      }
+      _move(){
+        let salto = this.line.length-1;
+        let position = this.line.indexOf('frog');
+        console.log(salto)
+        for(let i=0; i< this.toMove; i++){
+         
+          this.line[position]=null;
+         (position < salto) ? position++ :position= 0; 
+        }
+        this.line[position]="frog";
+        console.log(this.line);
+        this.set("indexfrog",position);
+      }
+    }
+
+    window.customElements.define(ExamenRana.is, ExamenRana);
+  </script>
+</dom-module>
